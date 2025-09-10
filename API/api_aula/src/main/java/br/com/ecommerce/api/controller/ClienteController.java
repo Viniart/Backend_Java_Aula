@@ -30,10 +30,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> cadastrarCliente(
-
-          @RequestBody Cliente cliente
-    ) {
+    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
         clienteService.cadastrarCliente(cliente);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);

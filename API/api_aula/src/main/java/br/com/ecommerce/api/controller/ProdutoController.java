@@ -1,6 +1,7 @@
 package br.com.ecommerce.api.controller;
 
 import br.com.ecommerce.api.model.Cliente;
+import br.com.ecommerce.api.model.Pedido;
 import br.com.ecommerce.api.model.Produto;
 import br.com.ecommerce.api.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,29 @@ public class ProdutoController {
         Produto produtoSalvo = produtoService.cadastrarProduto(produto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarProdutoPorId(@PathVariable Integer id) {
+        Produto produto = produtoService.buscarPorId(id);
+
+        if (produto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Produto " + id + " não encontrado!");
+        }
+
+        return ResponseEntity.ok(produto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarProduto(@PathVariable Integer id) {
+        Produto produto = produtoService.deletarProduto(id);
+
+        if (produto == null) {
+            return ResponseEntity.status(404)
+                    .body("Produto " + id + " não encontrado!");
+        }
+
+        return ResponseEntity.ok(produto);
     }
 }
