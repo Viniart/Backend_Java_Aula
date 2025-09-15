@@ -2,6 +2,8 @@ package br.com.ecommerce.api.controller;
 
 import br.com.ecommerce.api.model.Cliente;
 import br.com.ecommerce.api.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @RestController
 // Rota/Link do CONTROLLER
 @RequestMapping("/api/clientes")
+@Tag(name = "Clientes", description = "Métodos de Clientes")
 public class ClienteController {
     // Controller -> Service
     private final ClienteService clienteService;
@@ -22,6 +25,10 @@ public class ClienteController {
 
     // Listar Todos
     @GetMapping
+    @Operation(
+            summary = "Lista todos os clientes",
+            description = "Lista todos os clientes sem nenhuma restrição"
+    )
     public ResponseEntity<List<Cliente>> listarClientes() {
         // 1. Pegar a lista de clientes
         List<Cliente> clientes = clienteService.listarTodos();
@@ -89,5 +96,4 @@ public class ClienteController {
         // 3. Se achar retorno ok
         return ResponseEntity.ok(cl);
     }
-
 }
