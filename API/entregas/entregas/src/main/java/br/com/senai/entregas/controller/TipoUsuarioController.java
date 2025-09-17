@@ -61,7 +61,7 @@ public class TipoUsuarioController {
         TipoUsuario novoTipoUsuario = tipoUsuarioService.cadastrar(tipoUsuario);
 
         if (novoTipoUsuario == null) {
-            return ResponseEntity.badRequest().build(); // Retorna 400 sem corpo se a entrada for inválida
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novoTipoUsuario);
